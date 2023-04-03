@@ -261,3 +261,13 @@ Podemos também embutir uma classe CSS no campo do formulario especifico com alg
 
 OBS: LEMBRANDO QUE A VALIDACAO ACIMA É POR CADA CAMPO
 --------------------------------------------------------------------------------------------------
+10- Fazendo uma validaçao pelo Bakend para bloquear os submits 
+
+ <div class="form-group">
+    <div class="col-md-4 col-md-offset-2">
+        <span><button class="btn btn-success" 
+            id="Registrar" 
+            [disabled]="!cadastroForm.valid" <============ Dessa forma pelo HTML
+            type="submit">Registrar</button></span>
+    </div>
+</div>

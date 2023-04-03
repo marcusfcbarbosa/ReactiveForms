@@ -10,7 +10,7 @@ export class CadastroComponent implements OnInit {
 
   cadastroForm: FormGroup;
   usuario: Usuario;
-  
+  formResult:string;
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
@@ -26,6 +26,6 @@ export class CadastroComponent implements OnInit {
 
   adicionarUsuario() {
     this.usuario = Object.assign({},this.usuario,this.cadastroForm.value);
-    console.log(this.usuario);
+    this.formResult = JSON.stringify(this.cadastroForm.value);
   }
 }
