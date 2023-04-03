@@ -8,10 +8,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class CadastroComponent implements OnInit {
 
   cadastroForm: FormGroup;
-  constructor() { 
+  constructor() {
   }
-  ngOnInit() 
-  {
+
+  ngOnInit() {
     this.cadastroForm = new FormGroup({
       nome: new FormControl(''),
       cpf: new FormControl(''),
@@ -19,6 +19,13 @@ export class CadastroComponent implements OnInit {
       senha: new FormControl(''),
       senhaConfirmacao: new FormControl(''),
     });
-    
+
+  }
+
+
+  adicionarUsuario() {
+
+    let x = this.cadastroForm.value;
+    console.log(x);
   }
 }
