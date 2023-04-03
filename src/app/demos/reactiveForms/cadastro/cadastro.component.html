@@ -2,7 +2,7 @@
     <h4>Demo Cadastro</h4>
     <hr />
     <!-- <form novalidate (ngSubmit)="adicionarUsuario()" [formGroup]="cadastroForm"> -->
-        <form novalidate>
+        <form novalidate [formGroup]="cadastroForm" >
         <div class="form-horizontal">
 
             <div class="form-group">
@@ -10,6 +10,7 @@
                 <div class="col-md-10">
                     <input class="form-control" id="nome" type="text" 
                     placeholder="Nome (requerido)" 
+                    formControlName="nome"
                     />
                     <!-- <span class="text-danger" *ngIf="displayMessage.nome">
                         <p [innerHTML]="displayMessage.nome"></p>
@@ -21,7 +22,8 @@
                 <label class="col-md-2 control-label">CPF</label>
                 <div class="col-md-10">
                     <input class="form-control" id="cpf" type="text" placeholder="CPF (requerido)"
-                      />
+                    formControlName="cpf"  
+                    />
 
                     <!-- <span class="text-danger" *ngIf="displayMessage.cpf">
                         <p [innerHTML]="displayMessage.cpf"></p>
@@ -33,6 +35,7 @@
                 <label class="col-md-2 control-label">E-mail</label>
                 <div class="col-md-10">
                     <input class="form-control" id="email" type="text" placeholder="E-mail (requerido)" 
+                    formControlName="email"  
                     />
                     <!-- <span class="text-danger" *ngIf="displayMessage.email">
                         <p [innerHTML]="displayMessage.email"></p>
@@ -44,6 +47,7 @@
                 <label class="col-md-2 control-label">Senha</label>
                 <div class="col-md-10">
                     <input class="form-control" id="senha" type="password" placeholder="Senha (requerido)"
+                    formControlName="senha"  
                     />
                     <!-- <span class="text-danger" *ngIf="displayMessage.senha">
                         <p [innerHTML]="displayMessage.senha"></p>
@@ -55,7 +59,8 @@
                 <label class="col-md-2 control-label">Confirme a Senha</label>
                 <div class="col-md-10">
                     <input class="form-control" id="senhaConfirmacao" type="password" placeholder="Confirme a Senha (requerido)"
-                     />
+                    formControlName="senhaConfirmacao"   
+                    />
                     <!-- <span class="text-danger" *ngIf="displayMessage.senhaConfirmacao">
                         <p [innerHTML]="displayMessage.senhaConfirmacao"></p>
                     </span> -->
