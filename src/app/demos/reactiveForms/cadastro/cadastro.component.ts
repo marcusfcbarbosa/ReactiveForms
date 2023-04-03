@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from './models/usuario';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,7 +19,7 @@ export class CadastroComponent implements OnInit {
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      senha: ['', Validators.required],
+      senha: ['', [Validators.required, CustomValidators.rangeLength([6,15])]],
       senhaConfirmacao: ['', Validators.required]
     });
   }

@@ -311,5 +311,31 @@ isso para ERROS ESPECIFICOS
 
 npm i ng-brazil@2.0.9 <==== tem que ser nessa versao 
 
-npm i ng2-validation <================== a versao esta na 4.2.0
+npm i ng2-validation <================== a versao esta na 4.2.0 só importei esse
 
+
+
+ngOnInit() {
+    this.cadastroForm = this.fb.group({
+      nome: ['', Validators.required],
+      cpf: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, CustomValidators.rangeLength([6,15])]], <=== Validacao Customizada de senha 
+      senhaConfirmacao: ['', Validators.required]
+    });
+  }
+
+<div class="form-group">
+    <label class="col-md-2 control-label">Senha</label>
+    <div class="col-md-10">
+        <input class="form-control" id="senha" type="password" placeholder="Senha (requerido)"
+            formControlName="senha" />
+        <span class="text-danger"
+            *ngIf="cadastroForm.get('senha')?.errors?.rangeLength && (cadastroForm.get('senha').dirty || cadastroForm.get('senha').touched)">   <==== Essa validação funcionou
+            <p>Tamanho Invalido</p>
+        </span>
+    </div>
+</div>
+
+
+Parei no tempo 14:01
