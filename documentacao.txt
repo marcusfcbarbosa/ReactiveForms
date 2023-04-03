@@ -271,3 +271,15 @@ OBS: LEMBRANDO QUE A VALIDACAO ACIMA É POR CADA CAMPO
             type="submit">Registrar</button></span>
     </div>
 </div>
+
+
+DESSA FORMA VALIDA PELO .TS BACKEND
+ 
+ adicionarUsuario() {
+    if(this.cadastroForm.dirty &&this.cadastroForm.valid ){ <====== verifica se o formulario esta sujo e se esta valido
+      this.usuario = Object.assign({},this.usuario,this.cadastroForm.value);
+      this.formResult = JSON.stringify(this.cadastroForm.value);
+    }else{
+      this.formResult ='Cadastro Invalido'
+    }
+ }

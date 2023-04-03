@@ -25,7 +25,12 @@ export class CadastroComponent implements OnInit {
 
 
   adicionarUsuario() {
-    this.usuario = Object.assign({},this.usuario,this.cadastroForm.value);
-    this.formResult = JSON.stringify(this.cadastroForm.value);
+    if(this.cadastroForm.dirty &&this.cadastroForm.valid ){
+      this.usuario = Object.assign({},this.usuario,this.cadastroForm.value);
+      this.formResult = JSON.stringify(this.cadastroForm.value);
+    }else{
+      this.formResult ='Cadastro Invalido'
+    }
+    
   }
 }
