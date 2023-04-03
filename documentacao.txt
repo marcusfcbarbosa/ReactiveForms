@@ -1,3 +1,10 @@
+Devido ao curso
+ng --version
+Obs: Versao atual do node 12
+versao atual do angular cli 8.3.8
+
+
+
 1- Criando um componente que sera um formulario de cadastro
 ng g c demos/reactiveForms/cadastro
 ---------------------------------------------------------------------------------------------------------
@@ -95,3 +102,99 @@ e no app.router inserir uma nova rota
     </form>
 </div>
 --------------------------------------------------------------------------------------------------
+5- Vinculando os FormControl com o HTML
+formControlName="nome"
+
+dentro da tag html de cada input deve ser vinculado essa tag(formControlName="nomeDoRespectivoCampo")
+
+pois no .ts do componente esta assim
+
+ ngOnInit() 
+  {
+    let nome = new FormControl('');
+  }
+
+  Mas para submter varios campos todos juntos, deve-se utlizar FormGroup no seu .ts e vincular dentro
+  da tag form o FormGroup 
+
+  ou seja no .ts, fica dessa forma:
+
+  import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-cadastro',
+  templateUrl: './cadastro.component.html'
+})
+export class CadastroComponent implements OnInit {
+
+  cadastroForm: FormGroup; <=====================
+  constructor() { 
+  }
+  ngOnInit() 
+  {
+    this.cadastroForm = new FormGroup({
+      nome: new FormControl('') <=========================
+    });
+    
+  }
+}
+ e no HTML fica assim 
+ <form novalidate [formGroup]="cadastroForm" >
+
+--------------------------------------------------------------------------------------------------
+6- Para submeter um formulario pelo angular necessita , de um evento (ngSubmit) no template HTML
+No Momento do submit voce consegue visualizar todos os dados do formulario 
+ adicionarUsuario() {
+
+    let x = this.cadastroForm.value;  <============ todos os dados do formulario estao aqui 
+    console.log(x);
+  }
+--------------------------------------------------------------------------------------------------
+7-Agora trablhando com FormBuilder, ao invés de usar dessa Forma aqui 
+
+  ngOnInit() {
+    this.cadastroForm = new FormGroup({
+      nome: new FormControl(''),
+      cpf: new FormControl(''),
+      email: new FormControl(''),
+      senha: new FormControl(''),
+      senhaConfirmacao: new FormControl(''),
+    });
+
+Se injeta o FormBuilder no constructor dessa forma:
+constructor(private fb: FormBuilder) {
+  }
+
+ ngOnInit() {
+    this.cadastroForm = this.fb.group({
+      nome: [''],
+      cpf: [''],    <====== dai ele espera um array, dessa forma tambem pode incluir criterios de validação
+      email: [''],
+      senha: [''],
+      senhaConfirmacao: ['']
+    });
+  } 
+--------------------------------------------------------------------------------------------------
+8- Criando um objeto da aplicação que ira representar os dados enviados do formulario
+
+export interface Usuario {   <========= pode ser interface ou class se for class consegue habilitar algum tipo de comportamento, método etc
+    id: string;
+    nome: string;
+    CPF: string;
+    email: string;
+    senha: string;
+    senhaConfirmacao: string;
+}
+Inclui o objet no component.ts dessa forma 
+
+
+  usuario: Usuario;
+
+ e ao receber os dados do formulario e serializar no formato da interafce desejada faz isso
+  adicionarUsuario() {
+    this.usuario = Object.assign({},this.usuario,this.cadastroForm.value); <=======
+    console.log(this.usuario);
+  }
+--------------------------------------------------------------------------------------------------
+9-
