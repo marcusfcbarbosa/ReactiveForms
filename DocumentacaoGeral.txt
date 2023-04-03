@@ -1,0 +1,192 @@
+Versionamento do Angular
+
+Semantic Versioning
+
+2 Major Breaking change  || a cada 6 meses
+
+3 Minor New Features not breaking  || de 1 a 3 cada major release
+
+1 Patch Bugfixes not breaking  || Quase todas as semanas 
+
+2.3.1
+--------------------------------------------------
+Previews
+
+Beta 10.0.0-beta.0
+
+Release Candidate 10.0.0-rc
+--------------------------------------------------
+https://angular.io/guide/releases
+--------------------------------------------------
+Anatoma de uma App Angular
+
+		 -----------------------------------------------|
+Modulo = |Aplication = Component + Component + Component|
+		 |			   ---------------------------------|
+		 |					Services                    |
+---------------------------------------------------------
+Component = Template(Arquivo Html) + Class  (Properties, Methods) + Metadata 
+--------------------------------------------------
+Linguagens
+
+ES5 = Roda no bwoser
+
+ES6 = Novas Funcionalidades, Talvez seja necessario transpilar (precisa compilar para gerar em ES5)
+
+TypeScript = SuperSet de Javascript, Fortemente tipado, Ferramental rico na IDE, precisa transpilar
+			
+Dart = Não é Javascript
+--------------------------------------------------
+TypeScript = Desenvolvido pela Microsoft, Criada pelo pai do C# e .Net, OpenSource
+             Baseado em OOP
+			 Transpila para Javascript
+--------------------------------------------------
+Requisitos
+nodejs (ultima versao)
+	node -v
+	
+atualizar versao do npm
+npm install npm@latest -g
+
+https://www.npmjs.com/
+ex: https://www.npmjs.com/package/ngx-bootstrap (para trabalhar com bootstrap)
+
+https://www.npmjs.com/package/ngx-bootstrap/v/5.2.0  versao para o curso
+
+
+npm = node package manager (nuget)
+--------------------------------------------------
+https://angular.io/cli
+
+cli = command line interface
+
+instalar o cli 
+
+npm install -g @angular/cli
+	|-------------------------|
+	|ng new my-first-project  |
+	|cd my-first-project      |
+	|ng serve                 |
+    |-------------------------|
+ng new = criar nova aplicação
+
+ng generate = criar rotas, componentes, pipes
+
+ng serve = rodar localmente a sua aplicação
+
+Test, Lint = realizar testes unitarios, validar qualdiade de codigo
+--------------------------------------------------
+Criando projeto 
+
+ng new MinhaAppAngular
+
+nas versoes superiores a 12 do CLI, o arquivo e2e não é mais criado
+
+dentro da aplicação MinhaAppAngular
+execute code . para abrir o VSCODE
+--------------------------------------------------
+
+Na versao 15 do angular esses arquivos nao vem mais
+
+.browserslistrc
+.polyfills.ts   ==> gera suporte a browsers mais antigos
+.test.ts ==> arquivos de testes que rodam 
+.karma.config.js ==> arquivo que usa para rodar testes
+.environment.ts ==> ambiente de publicaçao
+.environment.prod.ts ==>
+
+esquema de rotas tambem nao pergunta e ben cria o arquivo
+--------------------------------------------------
+ng build cria um arquivo dist, que é o código que sera enviado para publicação
+
+--------------------------------------------------
+Extensoes
+Better Comments
+Angular Snippets
+--------------------------------------------------
+Gerar Component
+
+ng generate component pasta/nomeComponente
+
+
+ng generate component pasta/cadastro
+
+ng g component home
+
+Obs: dentro do .ts nao gera herda de OnInit
+
+export class CadastroComponent  {
+
+}
+
+componente possui 4 arquivos
+		.spec  <== testes 
+		.css   <== layout 
+		.ts    <== typescript com os 
+		.html  <== tela 
+------------------------------------------------
+ao criar o componente ele ja injeta no app.module
+mas o cli faz isso pra vc
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
+import { CadastroComponent } from './pasta/cadastro/cadastro.component';
+import { HomeComponent } from './home/home.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    CadastroComponent, <=====acabei de criar esses componentes
+    HomeComponent,     <=====acabei de criar esses componentes
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+------------------------------------------------
+decorator
+define o comportamento de uma classe
+
+os 4 cores mais importantes
+Injectable == para injetar serviços
+
+Component = referencia ao componente utilizado
+
+ngModule = criar um modulo especifico
+
+pipe= tratamento de como formatar uma informação na tela
+
+ViewChildren = como se fosse uma partialView
+------------------------------------------------
+CRIAR UM MODULO
+ng g module Funcionalidade <== modulo 
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';  <==== AO IMPORTAR CommonModule vc diz que esse nao é o modulo principal
+													somente o app.module é o modulo principal
+
+@NgModule({
+  declarations: [
+    //Seus Componentes
+  ],
+  imports: [
+    //seus modulos, tipo datepicker, rotas etc
+    CommonModule
+  ],
+  providers: [
+    //seus serviços, fazer uma consulta rest 
+  ]
+})
+export class FuncionalidadeModule { }
+------------------------------------------------
+CRIAR UM SERVIÇO
+
+ng g service Servico

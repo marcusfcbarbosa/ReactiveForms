@@ -197,4 +197,67 @@ Inclui o objet no component.ts dessa forma
     console.log(this.usuario);
   }
 --------------------------------------------------------------------------------------------------
-9-
+9- Validação Básica de Formulario ReactiveForms
+
+Dentro do Component.ts 
+
+this.cadastroForm = this.fb.group({
+      nome: ['',Validators.required],
+      cpf: ['',Validators.required],
+      email: ['',Validators.required],
+      senha: ['',Validators.required],
+      senhaConfirmacao: ['',Validators.required]
+    });
+no template HTML tambem é possivel visualizar se o formulario esta com os dados validos 
+<div class="form-group">
+    <div class="col-md-4 col-md-offset-2">
+        <p>Formulario valido: {{ cadastroForm.valid }}</p> <============= Dessa forma
+    </div>
+</div>
+
+ e no template HTML dentro do proprio campo que vc deseja validar voce pode trabalhar da seguinte forma:
+DESSA FORMA FICA SEMPRE EXIBIND A MENSAGEM
+<div class="form-group">
+    <label class="col-md-2 control-label" for="nome">Nome Completo</label>
+    <div class="col-md-10">
+        <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)"
+            formControlName="nome" />
+        <span class="text-danger" *ngIf="cadastroForm.get('nome').errors">   <==== a diretive *ngIf verifica se o campo dentro do Form cadastroForm do campo nome possui algum erro
+            <p>Preencha o Campo Nome </p>
+        </span>
+    </div>
+</div>
+
+EXISTEM VARIAS FORMAS UMA DELAS, É essa
+<span class="text-danger" 
+        <span class="text-danger" *ngIf="cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)"    <==============PRECISA HABILITAR ALGUMA LOGICA PARA APARECER (DESSA FORMA FUNCIONOU MELHOR)
+        [hidden]="!cadastroForm.get('nome').touched || cadastroForm.get('nome').dirty"><==============PRECISA HABILITAR ALGUMA LOGICA PARA APARECER
+        <p>Preencha o Campo Nome </p>
+    </span>
+</div>
+
+
+OBS: por padrão o formulario ja sobe com erro 
+cadastroForm.get('nome').errors <============= isso vai ser sempre true 
+
+Podemos também embutir uma classe CSS no campo do formulario especifico com algum forma de validaçao,usando a diretvia [ngClass]
+
+<div class="form-group">
+    <label class="col-md-2 control-label" for="nome">Nome Completo</label>
+    <div class="col-md-10">
+        <input class="form-control" id="nome" 
+        type="text" 
+        placeholder="Nome (requerido)"
+
+        [ngClass]="{'is-invalid': cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)}"    <=======ESSA AQUi
+        
+        formControlName="nome" />
+        <span class="text-danger" 
+        *ngIf="cadastroForm.get('nome').errors && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)">
+            <p>Preencha o Campo Nome </p>
+        </span>
+    </div>
+</div>
+
+OBS: LEMBRANDO QUE A VALIDACAO ACIMA É POR CADA CAMPO
+--------------------------------------------------------------------------------------------------
