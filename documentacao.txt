@@ -283,9 +283,10 @@ DESSA FORMA VALIDA PELO .TS BACKEND
       this.formResult ='Cadastro Invalido'
     }
  }
- ----------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------
 11- Habiliando uma validação e validações especificas para cada erro 
 é feito isso (adastroForm.get('email')?.errors?.email ) com uso do "?", pois aponta erros com nullable, entao se habilita esse modo unsafe
+isso para ERROS ESPECIFICOS 
 
 <div class="form-group">
 <label class="col-md-2 control-label">E-mail</label>
@@ -305,3 +306,10 @@ DESSA FORMA VALIDA PELO .TS BACKEND
     </span>
 </div>
 </div>
+----------------------------------------------------------------------------------------------
+12 - Tentando instalar uma dependencia que deu muito problema, validação de CPF, pelo
+
+npm i ng-brazil@2.0.9 <==== tem que ser nessa versao 
+
+npm i ng2-validation <================== a versao esta na 4.2.0
+
