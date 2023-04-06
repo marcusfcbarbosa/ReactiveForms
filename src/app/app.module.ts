@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { SobreComponent } from './institucional/sobre/sobre.component';
-import { rootRouterConfig } from './app.routes';
+import { AppRoutingModule, rootRouterConfig } from './app.routes';
 import { CadastroComponent } from './demos/reactiveForms/cadastro/cadastro.component';
 
 import { CustomFormsModule } from 'ng2-validation';
@@ -24,7 +24,7 @@ import { NavegacaoModule } from './navegacao/navegacao.module';
     ReactiveFormsModule,
     CustomFormsModule,
     NavegacaoModule,
-    [RouterModule.forRoot(rootRouterConfig, { useHash: false })]
+    AppRoutingModule    
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' }

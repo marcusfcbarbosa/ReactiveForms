@@ -17,9 +17,9 @@ import { RouterModule } from "@angular/router";
         CommonModule,//para dizer que não é o módulo principal
         RouterModule
     ], exports: [
-        MenuComponent,       //<===== precisa exportar os módulos,para que o módulo principal tenha acesso
-        HomeComponent, //<===== precisa exportar os módulos,para que o módulo principal tenha acesso
-        FooterComponent //<===== precisa exportar os módulos,para que o módulo principal tenha acesso
+        MenuComponent,  //<===== precisa exportar os módulos,para que o módulo principal tenha acesso
+        HomeComponent,  //<===== precisa exportar os módulos,para que o módulo principal tenha acesso
+        FooterComponent  //<===== precisa exportar os módulos,para que o módulo principal tenha acesso
     ]
 })
 

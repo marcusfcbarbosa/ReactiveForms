@@ -366,6 +366,57 @@ Nem sei o que falar Rever
 que é o módulo principal
 
   1-começando implementar módulo de navegação 
-  2- criei dentro do contexto de Navegacao o NavegacaoModule que é um módulos secundário  
+  2- criei dentro do contexto de Navegacao o NavegacaoModule que é um módulos secundário
 
 
+Todo novo módulo, deve obrigatoriamente importar
+import { NgModule } from "@angular/core";
+
+----------------------------------------------------------------------------------------------
+15 - Módulo de roteamento 
+
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from '@angular/router';
+     o app.route 
+
+     iremos transformar o 
+     export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full'},
+    { path: 'home', component: HomeComponent},
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent }
+];
+
+em um módulo segregado
+
+Ficou assim:
+---------------------------------
+import { NgModule } from "@angular/core";// para ter um módulo
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './navegacao/home/home.component';
+import { SobreComponent } from './institucional/sobre/sobre.component';
+import { CadastroComponent } from './demos/reactiveForms/cadastro/cadastro.component';
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent }
+];
+
+
+@NgModule({
+    imports: [
+        RouterModule.forRoot(rootRouterConfig)
+    ],
+    exports: [
+        RouterModule
+    ]
+})
+export class AppRoutingModule { }
+---------------------------------
+Dai remove do app.module (que é o módulo Principal) o 
+  [RouterModule.forRoot(rootRouterConfig, { useHash: false })]
+   e substitui por isso
+   AppRoutingModule
+----------------------------------------------------------------------------------------------
