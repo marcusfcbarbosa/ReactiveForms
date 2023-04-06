@@ -361,3 +361,11 @@ No momento que tirar o foco do campo que ele vai informar se o campo esta errado
 Nem sei o que falar Rever 
 
 "Validações avançadas de formulario"
+----------------------------------------------------------------------------------------------
+14- Separando a aplicaçao em módulos, para que nao fique tudo somente registrado no app.module 
+que é o módulo principal
+
+  1-começando implementar módulo de navegação 
+  2- criei dentro do contexto de Navegacao o NavegacaoModule que é um módulos secundário  
+
+
