@@ -463,3 +463,15 @@ export const rootRouterConfig: Routes = [
     },
 ];
 ----------------------------------------------------------------------------------------------
+17- Comunicação entre Componentes  Input Decorator
+
+                     @Input 
+    Componente Pai =================> Componente FIlho
+
+                      @Output
+    Componente Pai <================= Componente FIlho
+
+
+
+
+    
