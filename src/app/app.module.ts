@@ -12,6 +12,7 @@ import { CadastroComponent } from './demos/reactiveForms/cadastro/cadastro.compo
 import { CustomFormsModule } from 'ng2-validation';
 import { NavegacaoModule } from './navegacao/navegacao.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,

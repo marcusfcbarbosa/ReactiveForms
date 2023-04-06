@@ -9,7 +9,12 @@ export const rootRouterConfig: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'sobre', component: SobreComponent },
-    { path: 'cadastro', component: CadastroComponent }
+    { path: 'cadastro', component: CadastroComponent },
+    {
+        path: 'produtos',
+        loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
+            .then(m => m.ProdutoModule)
+    },
 ];
 
 

@@ -420,3 +420,46 @@ Dai remove do app.module (que é o módulo Principal) o
    e substitui por isso
    AppRoutingModule
 ----------------------------------------------------------------------------------------------
+16- Lazy Loading de módulos .
+
+criando componente dentro de demos 
+
+ng g c demos/arquitetura-componentes/produto-dashboard
+
+Por padrão ele ja injeta (ProdutoDashboardComponent) no módulo principal, (app.module), deve=se remover ele de la
+Pois o que acontece, vc ja ira chamar esse Component dentro do Módulo produto.module.ts 
+
+dentro desse novo componente, cria um módulo especifico e um de roteamento
+dentro de  arquitetura-componentes
+
+  1-produto.module.ts
+
+  por padrao ja se importar
+    
+    import { NgModule } from "@angular/core";// para ter um módulo
+    import { CommonModule } from "@angular/common";// para definir que esse não é o módulo principal 
+    import { RouterModule } from "@angular/router"; //pq ele precisa ter um roteamento proprio
+
+  2- produto.route.ts
+    Por padrao ja se importar
+      import { NgModule } from "@angular/core";// para ter um módulo
+      import { Routes, RouterModule } from '@angular/router';
+
+ 
+O bom do LazyLoading,e da segregação pe que ele funciona sozinho, não precisa ser injetado no app.module (Módulo Principal)
+a unica coisa que vc faz após concluir o componente é referenciar a rota no app.route em formato lazyLoading,
+dessa forma:
+
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    {
+        path: 'produtos',
+        loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
+            .then(m => m.ProdutoModule)
+    },
+];
+----------------------------------------------------------------------------------------------
