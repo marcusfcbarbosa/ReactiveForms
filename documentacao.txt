@@ -473,5 +473,5 @@ export const rootRouterConfig: Routes = [
 
 
 
-
-    
+    o padrao para cada novo compente filho
+    import { Component, Input } from "@angular/core";

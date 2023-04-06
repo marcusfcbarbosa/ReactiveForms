@@ -9,7 +9,6 @@ import { Produto } from "../models/produto";
 
 export class ProdutoDetalheComponent { 
 
-
     @Input() 
     produto:Produto;
 
