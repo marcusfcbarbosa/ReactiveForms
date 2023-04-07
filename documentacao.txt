@@ -484,3 +484,37 @@ isso sempre ocorre no formato de eventos
 
 Obs: Lembrand que esse evento vem do core e não do 'events'
 import { Component, Input, Output,EventEmitter } from "@angular/core";
+----------------------------------------------------------------------------------------------
+19- Ng-content projection slots 
+
+  customizar um item especifico dentro de um componente filho 
+  tipo o mesmo componente esta sendo utilizado em diversos lugares, mas em um lugar especifico
+  você deseja exibir uma informação diferente
+
+
+  através da tag <ng-content></ng-content> que vc insere no componente filho 
+  e dai dentro do componente pai entre as tags vc coloca o conteudo
+
+  <produto-card-detalhe class="col-md-4" *ngFor="let produto of produtos" [produto]="produto"
+            (status)="mudarStatus($event)">
+            <h5>Ou vá até uma de  nossas lojas</h5>
+        </produto-card-detalhe>
+
+<produto-card-detalhe>
+            <h5>Ou vá até uma de  nossas lojas</h5>   <==== coloca aqui dentro qualquer outra coisa
+</produto-card-detalhe> <==== do componente filho
+
+
+Dai por exemplo voce quer colocar mais mensagem porém ter um critério em qual momneto vc deve colocar
+deve-se usar o selector
+
+<ng-content select=".corre"></ng-content>
+select=".corre" <========== vai atras dos elementos do componente pai que possuem essa classe
+
+
+<produto-card-detalhe class="col-md-4" *ngFor="let produto of produtos" [produto]="produto"
+            (status)="mudarStatus($event)">
+            <h5 class="acabou"> Ou vá até uma de nossas lojas </h5>  <=======esse esta dentro do componente pai 
+            <h5 class="corre"> Corre que vai acabar </h5> <=======esse esta dentro do componente pai 
+</produto-card-detalhe>
+----------------------------------------------------------------------------------------------
