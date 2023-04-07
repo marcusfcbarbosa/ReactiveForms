@@ -472,6 +472,15 @@ export const rootRouterConfig: Routes = [
     Componente Pai <================= Componente FIlho
 
 
-
     o padrao para cada novo compente filho
     import { Component, Input } from "@angular/core";
+----------------------------------------------------------------------------------------------
+18- Comunicação entre Component Filho para Componente Pai @Output
+
+                      @Output
+    Componente Pai <================= Componente FIlho
+
+isso sempre ocorre no formato de eventos
+
+Obs: Lembrand que esse evento vem do core e não do 'events'
+import { Component, Input, Output,EventEmitter } from "@angular/core";
