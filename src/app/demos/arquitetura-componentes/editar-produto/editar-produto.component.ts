@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { privateDecrypt } from 'crypto';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutoService } from '../services/produto.service';
 import { Produto } from '../models/produto';
 
@@ -10,10 +9,11 @@ import { Produto } from '../models/produto';
   styles: []
 })
 export class EditarProdutoComponent implements OnInit {
-  produto : Produto;
+  produto: Produto;
   constructor(
     private route: ActivatedRoute,
-    private produtoService: ProdutoService
+    private produtoService: ProdutoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -24,4 +24,7 @@ export class EditarProdutoComponent implements OnInit {
 
   }
 
+  salvar() {
+    this.router.navigate(['/produtos']);
+  }
 }

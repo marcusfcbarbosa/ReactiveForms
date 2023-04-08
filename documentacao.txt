@@ -703,3 +703,27 @@ providers: [
 
 }
 ----------------------------------------------------------------------------------------------
+26 - Navegação Imperativa com Router API 
+
+precisa injetar a bibilioteca Router 
+import { ActivatedRoute, Router } from '@angular/router';
+
+ constructor(
+    private route: ActivatedRoute,
+    private produtoService: ProdutoService,
+    private router: Router <==============
+  ) { }
+
+
+
+ salvar() {
+    //fazer coomunicação com backend
+    this.router.navigate(['/produtos',2]);//pode colocar virgula e um Parametro 
+  }
+
+  Existem 2 metodos o this.router.navigateByUrl
+
+  this.router.navigateByUrl('/produtos'); // Como se tivesse colocando a url manualmente e dando um enter 
+
+  pelo this.router.navigate voce nao sente ele mudar de pagina, se usar o  navigateByUrl, parece que ao 
+  mudar ele da um refresh na tela
