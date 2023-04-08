@@ -11,7 +11,6 @@ const produtoRouterConfig: Routes = [
 @NgModule({
     imports: [
         RouterModule.forChild(produtoRouterConfig)
-
     ],
     exports: [RouterModule]
 })

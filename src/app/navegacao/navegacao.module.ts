@@ -5,13 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
 
     declarations: [
         MenuComponent,
         HomeComponent,
-        FooterComponent
+        FooterComponent,
+        NotFoundComponent
     ],//componentes do módulo
     imports: [
         CommonModule,//para dizer que não é o módulo principal

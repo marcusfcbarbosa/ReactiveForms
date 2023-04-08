@@ -554,3 +554,27 @@ no .ts do pai
 @ViewChildren(ProdutoDetalheComponent) botoes: QueryList<ProdutoDetalheComponent>;
 
 ----------------------------------------------------------------------------------------------
+21 - Tratamento de erro 404 quando a rota nao leva a lugar algum, nenhum componente 
+  
+  Criando um novo componente 
+          ng g c navegacao/notFound
+
+dentro do app.module coloque dessa forma
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    
+    { path: 'home', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    {
+        path: 'produtos',
+        loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
+            .then(m => m.ProdutoModule)
+    },
+    { path: '**', component:NotFoundComponent }// <==== essa configuracao tem que estar por ultimo, senao ela se sobrepoe as outras rotas
+];          
+
+
+
+----------------------------------------------------------------------------------------------
