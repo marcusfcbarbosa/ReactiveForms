@@ -727,3 +727,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 
   pelo this.router.navigate voce nao sente ele mudar de pagina, se usar o  navigateByUrl, parece que ao 
   mudar ele da um refresh na tela
+----------------------------------------------------------------------------------------------
+  27 - Route Tracing saber em qual rota ele ta passando sem ficar enchendo de console.log 
+
+  dentro do app.route, adicione a flag { enableTracing: true }
+
+  @NgModule({
+    imports: [
+        RouterModule.forRoot(rootRouterConfig, { enableTracing: true }) //não use em produção como true, apenas para inspeção
+    ],
+
+    salvo uma imagem de como fica na inspeção (27 -Route Tracing Inspeção.png)
+----------------------------------------------------------------------------------------------

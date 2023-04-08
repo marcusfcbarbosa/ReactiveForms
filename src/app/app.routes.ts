@@ -8,7 +8,7 @@ import { NotFoundComponent } from "./navegacao/not-found/not-found.component";
 
 export const rootRouterConfig: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    
+
     { path: 'home', component: HomeComponent },
     { path: 'sobre', component: SobreComponent },
     { path: 'cadastro', component: CadastroComponent },
@@ -17,13 +17,13 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
             .then(m => m.ProdutoModule)
     },
-    { path: '**', component:NotFoundComponent }// <==== essa configuracao tem que estar por ultimo, senao ela se sobrepoe as outras rotas
+    { path: '**', component: NotFoundComponent }// <==== essa configuracao tem que estar por ultimo, senao ela se sobrepoe as outras rotas
 ];
 
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(rootRouterConfig)
+        RouterModule.forRoot(rootRouterConfig, { enableTracing: true })
     ],
     exports: [
         RouterModule
