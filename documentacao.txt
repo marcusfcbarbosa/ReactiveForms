@@ -578,3 +578,27 @@ export const rootRouterConfig: Routes = [
 
 
 ----------------------------------------------------------------------------------------------
+22- estilização de rota ativa
+   Tipo no menu ou algum BreadCrumb
+
+
+dentro do menu
+
+se estier na rota selecionada routerLinkActive="active" fica em evidencia o link
+
+<ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+            <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLinkActive="router-link-active"   [routerLink]="['/cadastro']">Cadastro</a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active"  [routerLink]="['/sobre']">Sobre</a>
+      </li>
+      <li class="nav-item">
+            <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }"  routerLinkActive="active" [routerLink]="['/produtos']">Produtos</a>
+      </li>
+</ul>
+
+
+se for uma rota variante, ou rota filha
+<a class="nav-link" [routerLinkActiveOptions]="{ exact: false }" routerLinkActive="active"  [routerLink]="['/sobre']">Sobre</a>
+----------------------------------------------------------------------------------------------
