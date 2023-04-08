@@ -26,7 +26,7 @@ import { NavegacaoModule } from './navegacao/navegacao.module';
     ReactiveFormsModule,
     CustomFormsModule,
     NavegacaoModule,
-    AppRoutingModule    
+    AppRoutingModule
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' }

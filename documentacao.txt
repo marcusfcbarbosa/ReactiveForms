@@ -608,3 +608,73 @@ se for uma rota variante, ou rota filha
 
 
 ----------------------------------------------------------------------------------------------
+24 - Rotas Filhas em Sub-Módulo 
+
+  tipo navegando dentro do componente filho 
+  /produtos/editar/323
+
+  Criando um novo componente 
+
+  
+  
+  
+  ng g c demos/arquitetura-componentes/editarProduto
+
+
+
+
+  O que acontece, temos no app.module (que é o modulo principal), esse provider
+
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' }  
+  ],
+
+  ele define que tudo após seu dominio ele vai cuidar do redirecionamento, que trabalha junt com o 
+  app.route, que tbm é o principal
+
+  dentro do app.component.html ele possui essa tag
+  
+  <router-outlet></router-outlet> //que basicamente cuida de todos os roteamentos dentro da aplicação
+  entao, para que tenha uma navegação interna através dos módulos e nao se perder na rota, deve-se definir O
+  um novo componente principal para o módulo de produtos 
+
+  produto.app.component.ts 
+
+  ProdutoAppComponent, dessa forma:
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'produto-app-root',
+  template: '<router-outlet></router-outlet>'
+})
+export class ProdutoAppComponent {
+  
+}
+
+E dentro do produto.route, definir ele como principal para rota vazia e o resto como se fosse seus filhos
+
+const produtoRouterConfig: Routes = [
+    {
+        path: '', component: ProdutoAppComponent, children: [
+            { path: '', component: ProdutoDashboardComponent },
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ]
+    },
+];
+
+Cria-se um roteamento 100% autonomo. Ou seja modo mais correto de implementar
+
+
+
+
+Ou simplesmente ir no index.html e colocar isso
+<head>
+  <base href="/">  <============
+
+e remover do app.module, o APP_BASE_HREF
+providers: [
+    { provide: APP_BASE_HREF, useValue: '/' }
+  ],
+----------------------------------------------------------------------------------------------
