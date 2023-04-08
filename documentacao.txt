@@ -518,3 +518,39 @@ select=".corre" <========== vai atras dos elementos do componente pai que possue
             <h5 class="corre"> Corre que vai acabar </h5> <=======esse esta dentro do componente pai 
 </produto-card-detalhe>
 ----------------------------------------------------------------------------------------------
+20- Interagir com eventos do HTML , por exemplo evento click 
+obter uma coleção ou item através do Decorator @ViewChildren ou @ViewChild
+
+Dentro do .html 
+
+<h1 #teste>Lista Produtos</h1>
+
+Dentro do componente.ts 
+
+@ViewChild('teste', { static: false }) mensagemTela: ElementRef;
+
+Porém deve ser tratada após a pagina ser renderizada
+
+herda de  AfterViewInit
+
+export class ProdutoDashboardComponent implements OnInit, AfterViewInit {
+
+  o que força a implementação do 
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+
+é possivel fazer isso tambem com um componente Filho
+no .ts do pai 
+
+@ViewChild(ProdutoCountComponent, { static: false }) contador: ProdutoCountComponent;
+
+@ViewChild ==> quando pega somente um elemento
+
+@ViewChildren==> quando pegar  uma coleção de elementos
+
+
+@ViewChildren(ProdutoDetalheComponent) botoes: QueryList<ProdutoDetalheComponent>;
+
+----------------------------------------------------------------------------------------------
