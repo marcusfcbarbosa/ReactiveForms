@@ -602,3 +602,9 @@ se estier na rota selecionada routerLinkActive="active" fica em evidencia o link
 se for uma rota variante, ou rota filha
 <a class="nav-link" [routerLinkActiveOptions]="{ exact: false }" routerLinkActive="active"  [routerLink]="['/sobre']">Sobre</a>
 ----------------------------------------------------------------------------------------------
+23 - Links de navegação dinamica ex: os links da barra de menu , montar dinamicamente
+
+  Popule ou resgate algum objeto no componente.ts do menu.ts e preencha o html conforme esta no menu.html 
+
+
+----------------------------------------------------------------------------------------------
