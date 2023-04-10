@@ -1008,3 +1008,8 @@ Exemplo:
 
 O canLoad, só pode ser utilizado quando se usa o LazyLoading
 ----------------------------------------------------------------------------------------------
+31 - Route canDeactive Guard 
+     Faz o contrario do anterior, impede que vc saia da rota 
+
+     Imaginamos que vc esteja em um cadastro, vc nao pode sair dele caso algum criterio, nao esteja
+     sendo obedecido 
