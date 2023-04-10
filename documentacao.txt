@@ -739,3 +739,119 @@ import { ActivatedRoute, Router } from '@angular/router';
 
     salvo uma imagem de como fica na inspeção (27 -Route Tracing Inspeção.png)
 ----------------------------------------------------------------------------------------------
+28 - Route Resolves and Snapshots
+
+por exemplo temos uma rota de edição
+
+http://localhost:4200/produtos/editar/1   <===== queremos pegar o 1, sem o Router 
+
+ this.route.params
+      .subscribe(params => {  <=== Router 
+        params['id']
+      });
+
+Tipo querendo fazer um filtro com base em algum tipo de pesquisa
+Exemplo:
+
+http://localhost:4200/produtos/ativos
+
+http://localhost:4200/produtos/inativos
+
+http://localhost:4200/produtos/expirados
+
+
+
+no router do modulo que vc deseja filtrar pelo estado
+
+const produtoRouterConfig: Routes = [
+    {
+        path: '', component: ProdutoAppComponent, children: [
+            { path: '', redirectTo:'todos'  },
+            { path: ':estado', component: ProdutoDashboardComponent }, <==== inclua ele na rota :estado
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ]
+    },
+];
+
+Feito isso cria-se o resolve que é um serviço, que será injetado, deve-se herdar de Resolve<T>
+cujo tipo no caso é o objeto que vc deseja filtrar , no caso é o Produto 
+ele pede que vc implemente esse método que pode ter 3 tipos diferentes de retorno 
+
+1- Produto 
+2- Observable<Produto>
+3- Promise<Produto>
+
+@Injectable()
+export class ProdutoResolve  implements Resolve<Produto> {
+    
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Produto | Observable<Produto> | Promise<Produto> {
+        throw new Error("Method not implemented.");
+    }
+
+}
+
+Porém pode deixar mais simples a implementação
+
+@Injectable()
+export class ProdutoResolve  implements Resolve<Produto[]> {
+    constructor(private produtoService: ProdutoService){
+    }
+
+    resolve(route: ActivatedRouteSnapshot) {
+        return this.produtoService.obterTodos(route.params.estado);
+    }
+
+}
+
+o  route.params.estado você pega do produto.router.ts 
+
+const produtoRouterConfig: Routes = [
+    {
+        path: '', component: ProdutoAppComponent, children: [
+            { path: '', redirectTo:'todos'  },
+            { path: ':estado', component: ProdutoDashboardComponent }, <==== pego daqui
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ]
+    },
+];
+
+e dai vc altera a rota assim:
+
+const produtoRouterConfig: Routes = [
+    {
+        path: '', component: ProdutoAppComponent, children: [
+            { path: '', redirectTo: 'todos' },
+            {
+                path: ':estado',
+                component: ProdutoDashboardComponent,
+                resolve: {
+                    produtos: ProdutoResolve <=========o Resolve que acabou de ser criado
+                }
+            },
+            { path: 'editar/:id', component: EditarProdutoComponent }
+        ]
+    },
+];
+
+
+no caso no componente que vc alimenta fuca assim, no caso é o produto-dashboard.component.ts
+
+  this.route.snapshot.data o "data" é o dado da rota 
+
+  this.route => rota ativa ActivatedRoute
+  snapshot => estado atual 
+  data => dado da rota 
+
+  constructor(private route: ActivatedRoute) { }
+  ngOnInit() {
+    this.produtos = this.route.snapshot.data['produtos'];
+  }
+
+Conclusao: ao invès de usar o backend, voce faz esse tipo de requisiçao pela propria rota 
+
+
+1- cvriar um resolve
+2- passar o serviço que vai usar para obter os dados 
+3- registrar o resolve como um serviço dentro do respectivo módulo 
+4- na rota vc diz que esta trabalhando com resolve 
+5- dentro do component vc diz que esta usando snapshot da rota ativa 
