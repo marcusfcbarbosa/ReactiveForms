@@ -19,13 +19,14 @@ export class ProdutoDashboardComponent implements OnInit, AfterViewInit {
 
 
   @ViewChildren(ProdutoDetalheComponent) botoes: QueryList<ProdutoDetalheComponent>;
-  
-  
+
+
   constructor(private route: ActivatedRoute) { }
 
 
   ngOnInit() {
     this.produtos = this.route.snapshot.data['produtos'];
+    console.log(this.route.snapshot.data['teste']);
   }
 
   ngAfterViewInit(): void {
@@ -37,12 +38,12 @@ export class ProdutoDashboardComponent implements OnInit, AfterViewInit {
     });
 
     //ViewChild
-    console.log('Objeto do Contador:', this.contador.produtos);
+    //console.log('Objeto do Contador:', this.contador.produtos);
 
     //ViewChildren
-    this.botoes.forEach(p=>{
-      console.log('Log para cada produto do ProdutoDetalheComponent :');
-      console.log( p.produto);
+    this.botoes.forEach(p => {
+      // console.log('Log para cada produto do ProdutoDetalheComponent :');
+      // console.log(p.produto);
     });
   }
 
