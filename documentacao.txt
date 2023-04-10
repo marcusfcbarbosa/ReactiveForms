@@ -1013,3 +1013,7 @@ O canLoad, só pode ser utilizado quando se usa o LazyLoading
 
      Imaginamos que vc esteja em um cadastro, vc nao pode sair dele caso algum criterio, nao esteja
      sendo obedecido 
+
+    Tipo começou a preencher um cadastro,mas nao terminou e quer sair da tela
+
+    Mesmo roteiro que o outro,cria um serviço que faz uma hernaça e coloca ele no app.route 
