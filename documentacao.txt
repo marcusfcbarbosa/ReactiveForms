@@ -888,7 +888,123 @@ constructor(private route: ActivatedRoute) { }
   }
 
 
-
-
 Conclusao: Voce usa o Resolve item 28, para colocar dados dentro da rota , ou você pode de maneira 
 direta ja enfiar dados dentro da rota usando o marcador "data"
+----------------------------------------------------------------------------------------------
+30- Route Guard o guarda da rota 
+
+Rotas com certos perfis podem acessar
+
+Criando um componente de Admin, e configurando para ser um módulo independente, com modulo e roteamento proprio 
+
+ng g c admin/admin-dashboard
+
+
+lembrando de deletar o app.module e somente ser carregado pelo lazyLoading, do app.route 
+
+
+Dentro da app.route, implementa um novo atributo o "canLoad" 
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+    { path: 'home', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    {
+        path: 'produtos',
+        loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
+            .then(m => m.ProdutoModule)
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module')
+            .then(m => m.AdminModule),
+            canLoad:[] <=============================================Esse atributo aqui
+    },
+    { path: '**', component: NotFoundComponent }// <==== essa configuracao tem que estar por ultimo, senao ela se sobrepoe as outras rotas
+];
+
+cria-se um novo serviço de guarda que implementa o CanLoad,no momento que tenta herdar ele já força uma implementação
+com um método enorme, não precisa de nada disso, pode estar vazio os parametros
+
+@Injectable()
+export class AuthGuard  implements CanLoad {
+    canLoad(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
+        throw new Error("Method not implemented.");
+    } 
+}
+
+
+Pode fica assim:
+
+canLoad() {
+        throw new Error("Method not implemented.");
+    } 
+
+Dai comunica ou injeta algum outro serviço que valida se o usuario tem perfil ou não
+
+@Injectable()
+export class AuthGuard implements CanLoad {
+
+    user = { admin: false, logged: false }
+
+    canLoad() {
+        return this.user.admin;
+    }
+}
+
+E no app.route 
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+    { path: 'home', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    {
+        path: 'produtos',
+        loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
+            .then(m => m.ProdutoModule)
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module')
+            .then(m => m.AdminModule),
+            canLoad:[AuthGuard] <======================================Esse atributo aqui que retorna um true ou false 
+    },
+    { path: '**', component: NotFoundComponent }// <==== essa configuracao tem que estar por ultimo, senao ela se sobrepoe as outras rotas
+];
+
+
+Existe mais um passo de verificação para ver se ele baixa o  módulo que é o canActivate
+
+export const rootRouterConfig: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+    { path: 'home', component: HomeComponent },
+    { path: 'sobre', component: SobreComponent },
+    { path: 'cadastro', component: CadastroComponent },
+    {
+        path: 'produtos',
+        loadChildren: () => import('./demos/arquitetura-componentes/produto.module')//dessa forma ativa o lazyLoading, para módulo externo
+            .then(m => m.ProdutoModule)
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module')
+            .then(m => m.AdminModule),
+            canLoad: [AuthGuard], canActivate: [AuthGuard] <==== que tbm faz uso de um Guard 
+    },
+    { path: '**', component: NotFoundComponent }// <==== essa configuracao tem que estar por ultimo, senao ela se sobrepoe as outras rotas
+];
+
+o canActivate pode ser colocado em qualquer tipo de componente seja ele LazyLoading ou nao 
+
+Exemplo:
+
+{ path: 'sobre', component: SobreComponent , canActivate: [AuthGuard]},
+
+
+O canLoad, só pode ser utilizado quando se usa o LazyLoading
+----------------------------------------------------------------------------------------------

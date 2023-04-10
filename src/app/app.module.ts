@@ -11,6 +11,8 @@ import { CadastroComponent } from './demos/reactiveForms/cadastro/cadastro.compo
 
 import { CustomFormsModule } from 'ng2-validation';
 import { NavegacaoModule } from './navegacao/navegacao.module';
+import { AuthGuard } from './services/app.guard';
+
 
 
 
@@ -29,7 +31,8 @@ import { NavegacaoModule } from './navegacao/navegacao.module';
     AppRoutingModule
   ],
   providers: [
-    { provide: APP_BASE_HREF, useValue: '/' }
+    { provide: APP_BASE_HREF, useValue: '/' },
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
