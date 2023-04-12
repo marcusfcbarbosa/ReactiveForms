@@ -19,11 +19,11 @@ ng g c demos/reactiveForms/cadastro
   ],
   ---------------------------------------------------------------------------------------------------------
   3- Criar um link no menu de component
-  menu.component.html
-<li class="nav-item">
-            <a class="nav-link"  [routerLink]="['/cadastro']">Cadastro</a>
-</li>
-e no app.router inserir uma nova rota
+    menu.component.html
+    <li class="nav-item">
+                <a class="nav-link"  [routerLink]="['/cadastro']">Cadastro</a>
+    </li>
+    e no app.router inserir uma nova rota
 
     { path: 'cadastro', component: CadastroComponent }
   ---------------------------------------------------------------------------------------------------------
@@ -1017,3 +1017,4 @@ O canLoad, só pode ser utilizado quando se usa o LazyLoading
     Tipo começou a preencher um cadastro,mas nao terminou e quer sair da tela
 
     Mesmo roteiro que o outro,cria um serviço que faz uma hernaça e coloca ele no app.route 
+----------------------------------------------------------------------------------------------
