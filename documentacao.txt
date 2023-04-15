@@ -1039,3 +1039,43 @@ criando um novo componente
 
 Não esta registrado globalmente, em todos os componentes que são dependentes do app.module
 ----------------------------------------------------------------------------------------------
+34- Providers UseValue - NgModules- InjectionToken
+
+  você consegue distinguir providers de módulos diferentes de acordo com a forma que vc chama dentro do
+  módulo que vc injeta, neste caso esta sendo injetado dentro do app.module 
+
+
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CustomFormsModule,
+    NavegacaoModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BarDiZonesModule.forRoot({         <==================== BarDiZoneModule no metodo forRoot
+      unidadeId:1000,
+      unidadeToken:'66116bee-bce7-49d4-b845-b4c329220279'
+    })
+  ],
+
+
+BarDiZoneModule no metodo forRoot
+
+//Esse módulo pode ser apresentado como módulo de formas diferentes, depende de como vc chamar
+export class BarDiZonesModule { 
+
+    static forRoot(config: BarUnidadeConfig) : ModuleWithProviders {
+        return {
+            ngModule: BarDiZonesModule,
+            //Providers customizado de acordo com o método que vc chama
+            providers:[]
+        }
+    }
+
+}
+
+Resumindo o módulo pode ser chamado com o método da classe, e chamando providers ESPECIFICOS
+utilizando InjectionTokens 
+----------------------------------------------------------------------------------------------

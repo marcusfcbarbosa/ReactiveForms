@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { BarDiZoneServiceMock, BarDiZoneServices } from './bar-di-zones.service';
+import { BAR_UNIDADE_CONFIG, BarUnidadeConfig } from './bar-di-zones.config';
 
 @Component({
   selector: 'app-bar-di-zones',
@@ -10,11 +11,19 @@ import { BarDiZoneServiceMock, BarDiZoneServices } from './bar-di-zones.service'
 })
 export class BarDiZonesComponent implements OnInit {
 
+  ConfigManual: BarUnidadeConfig;
+  Config: BarUnidadeConfig;
   barBebida1: string;
-  constructor(private barService: BarDiZoneServices) { }
+  constructor(private barService: BarDiZoneServices,
+    @Inject('ConfigManualUnidade') private ApiConfigManual: BarUnidadeConfig,
+    @Inject(BAR_UNIDADE_CONFIG) private ApiConfig: BarUnidadeConfig
+  ) {
+  }
 
   ngOnInit(): void {
     this.barBebida1 = this.barService.obterBebidas();
+    this.ConfigManual = this.ApiConfigManual;
+    this.Config = this.ApiConfig;
   }
 
 }

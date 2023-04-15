@@ -47,7 +47,10 @@ export const BAR_PROVIDERS:   Provider[] = [
     NavegacaoModule,
     AppRoutingModule,
     HttpClientModule,
-    BarDiZonesModule
+    BarDiZonesModule.forRoot({
+      unidadeId:1000,
+      unidadeToken:'66116bee-bce7-49d4-b845-b4c329220279'
+    })
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
