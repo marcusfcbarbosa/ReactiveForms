@@ -1018,3 +1018,24 @@ O canLoad, só pode ser utilizado quando se usa o LazyLoading
 
     Mesmo roteiro que o outro,cria um serviço que faz uma hernaça e coloca ele no app.route 
 ----------------------------------------------------------------------------------------------
+32 - Pipes Customizados (Para formatar informaçao em tela)
+
+criando um novo componente
+ ng g c demos/pipes/filmes
+
+----------------------------------------------------------------------------------------------
+33- Providers e UseClass (Injecao de Dependencias e Zonas)
+
+ 1- criando um novo component
+  ng g c demos/BarDiZones
+
+  @Component({
+  selector: 'app-bar-di-zones',
+  templateUrl: './bar-di-zones.component.html',
+  providers: [
+    { provide: BarDiZoneServices, useClass: BarDiZoneServiceMock } //apenas o componente esta resolvendo a injecao de dependencia, não está registrada em nenhum outro módulo
+  ]
+})
+
+Não esta registrado globalmente, em todos os componentes que são dependentes do app.module
+----------------------------------------------------------------------------------------------

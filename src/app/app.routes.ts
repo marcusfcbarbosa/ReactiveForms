@@ -8,6 +8,7 @@ import { NotFoundComponent } from "./navegacao/not-found/not-found.component";
 import { AuthGuard } from "./services/app.guard";
 import { CadastroGuard } from "./services/cadastro.guard";
 import { FilmesComponent } from "./demos/pipes/filmes/filmes.component";
+import { BarDiZonesComponent } from "./demos/bar-di-zones/bar-di-zones.component";
 
 export const rootRouterConfig: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,6 +16,7 @@ export const rootRouterConfig: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'sobre', component: SobreComponent },
     { path: 'filmes', component: FilmesComponent },
+    { path: 'bar', component: BarDiZonesComponent },
     { path: 'cadastro', component: CadastroComponent, canDeactivate: [CadastroGuard] },
     {
         path: 'produtos',
