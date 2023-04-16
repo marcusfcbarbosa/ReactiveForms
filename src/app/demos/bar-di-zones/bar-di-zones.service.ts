@@ -30,10 +30,16 @@ export class BarDiZoneServiceMock {
     }
 }
 
+
+
 //Obtendo a Instancia desse serviço através de uma factory
 export function BarFactory(http: HttpClient
     //, config: BarUnidadeConfig
     , injector: Injector //serviceLocator, pois ele localiza dentro do motor de dependencia
 ) {
     return new BarDiZoneServices(http, injector.get(BAR_UNIDADE_CONFIG));
+}
+
+export abstract class BebidaService {
+    obterBebidas: () => string;
 }

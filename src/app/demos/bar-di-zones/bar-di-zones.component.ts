@@ -1,5 +1,5 @@
 import { Component, Inject, Injector, OnInit } from '@angular/core';
-import { BarDiZoneServiceMock, BarDiZoneServices, BarFactory } from './bar-di-zones.service';
+import { BarDiZoneServiceMock, BarDiZoneServices, BarFactory, BebidaService } from './bar-di-zones.service';
 import { BAR_UNIDADE_CONFIG, BarUnidadeConfig } from './bar-di-zones.config';
 import { HttpClient } from '@angular/common/http';
 
@@ -13,10 +13,11 @@ import { HttpClient } from '@angular/common/http';
       provide: BarDiZoneServices,
       useFactory: BarFactory,
       deps: [HttpClient, //dependencias, que o método BarFactory recebe como parametro
-         //BAR_UNIDADE_CONFIG,
+        //BAR_UNIDADE_CONFIG,
         Injector
       ]
-    }
+    },
+    { provide: BebidaService, useExisting: BarDiZoneServices }
   ]
 })
 export class BarDiZonesComponent implements OnInit {
@@ -24,10 +25,12 @@ export class BarDiZonesComponent implements OnInit {
   ConfigManual: BarUnidadeConfig;
   Config: BarUnidadeConfig;
   barBebida1: string;
+  barBebida2: string;
   dadosUnidade: string;
   constructor(private barService: BarDiZoneServices,
     @Inject('ConfigManualUnidade') private ApiConfigManual: BarUnidadeConfig,
-    @Inject(BAR_UNIDADE_CONFIG) private ApiConfig: BarUnidadeConfig
+    @Inject(BAR_UNIDADE_CONFIG) private ApiConfig: BarUnidadeConfig,
+    private bebidaService: BebidaService
   ) {
   }
 
@@ -36,6 +39,7 @@ export class BarDiZonesComponent implements OnInit {
     this.ConfigManual = this.ApiConfigManual;
     this.Config = this.ApiConfig;
     this.dadosUnidade = this.barService.obterUnidade();
+    this.barBebida2 = this.bebidaService.obterBebidas();//Ele chama o metodo do BarService, que e igual ao metodo da classe abstrata
   }
 
 }

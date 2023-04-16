@@ -1081,3 +1081,14 @@ utilizando InjectionTokens
 ----------------------------------------------------------------------------------------------
 35- Providers- UseFactory
 //Obtendo a Instancia desse serviço através de uma factory
+
+----------------------------------------------------------------------------------------------
+36- Providers -UseExisting 
+  
+  Limitar metodos disponiveis para uso de um componente Especifico "UseExisting"
+
+   
+   { provide: BebidaService, useExisting: BarDiZoneServices }//Dessa forma ele se limita a um metodo
+
+
+BebidaService é um metodo que acaba virando uma interface especializada para aquele componente
