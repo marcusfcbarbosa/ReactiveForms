@@ -1079,3 +1079,5 @@ export class BarDiZonesModule {
 Resumindo o módulo pode ser chamado com o método da classe, e chamando providers ESPECIFICOS
 utilizando InjectionTokens 
 ----------------------------------------------------------------------------------------------
+35- Providers- UseFactory
+//Obtendo a Instancia desse serviço através de uma factory

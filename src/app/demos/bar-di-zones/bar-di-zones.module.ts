@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ModuleWithProviders, NgModule } from "@angular/core";
+import { Injector, ModuleWithProviders, NgModule } from "@angular/core";
 import { BarDiZonesComponent } from "./bar-di-zones.component";
 import { BAR_UNIDADE_CONFIG, BarUnidadeConfig } from "./bar-di-zones.config";
 
@@ -26,7 +26,8 @@ export class BarDiZonesModule {
             //Providers customizado de acordo com o método que vc chama
             providers: [
                 { provide: 'ConfigManualUnidade', useValue: config },
-                { provide: BAR_UNIDADE_CONFIG, useValue: config }
+                { provide: BAR_UNIDADE_CONFIG, useValue: config },
+               
             ]
         }
     }
